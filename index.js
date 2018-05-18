@@ -7,7 +7,7 @@ module.exports = function makeSafeEval (include) {
       clearGlobals += 'var ' + globals[i] + ' = undefined;'
     }
   }
-  return function (operation) {
+  return function (operation, context) {
     var globals = undefined // out of scope for operation
     return eval('(function () {' + clearGlobals + ';return ' + operation.replace('this', '_this') + '})()')
   }
